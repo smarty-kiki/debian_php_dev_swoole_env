@@ -20,6 +20,8 @@ RUN sed -i -e "s/^bind\-address/#bind\-address/g" /etc/mysql/mariadb.conf.d/50-s
 RUN sed -i -e "s/^#general_log/general_log/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN sed -i -e "s/^query_cache_limit\ .*/query_cache_limit\ =\ 0M/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN sed -i -e "s/^query_cache_size\ .*/query_cache_size\ =\ 0M/g" /etc/mysql/mariadb.conf.d/50-server.cnf
+RUN cat /etc/php/7.3/mods-available/pdo.ini | sed -e "s/pdo/swoole/g" > /etc/php/7.3/mods-available/swoole.ini
+RUN ln -fs /etc/php/7.3/mods-available/swoole.ini /etc/php/7.3/cli/conf.d/10-swoole.ini
 
 RUN touch /tmp/php_exception.log && \
     touch /tmp/php_notice.log && \
