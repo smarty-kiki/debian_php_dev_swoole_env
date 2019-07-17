@@ -7,6 +7,7 @@ then
 fi
 
 service mysql start
+service beanstalkd start
 service supervisor start
 
 mysql -e "create database \`default\`"
