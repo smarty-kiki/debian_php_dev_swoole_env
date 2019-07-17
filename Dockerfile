@@ -4,11 +4,12 @@ RUN apt-get update && \
     apt-get install apt-utils -y && \
     apt-get upgrade -y && \
     apt-get install mariadb-server -y && \
-    apt-get install php-dev -y && \
+    apt-get install beanstalkd -y && \
     apt-get install php-curl -y && \
     apt-get install php-dom -y && \
     apt-get install php-mbstring -y && \
     apt-get install php-yaml -y && \
+    apt-get install php-dev -y && \
     apt-get install supervisor -y && \
     pecl install swoole
 
