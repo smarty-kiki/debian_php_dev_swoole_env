@@ -3,7 +3,10 @@ FROM debian:latest
 RUN apt-get update && \
     apt-get install apt-utils -y && \
     apt-get upgrade -y && \
+    apt-get install nginx -y && \
     apt-get install mariadb-server -y && \
+    apt-get install redis-server -y && \
+    apt-get install mongodb -y && \
     apt-get install beanstalkd -y && \
     apt-get install php-curl -y && \
     apt-get install php-dom -y && \
