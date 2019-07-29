@@ -12,6 +12,7 @@ RUN apt-get update && \
     apt-get install php-mbstring -y && \
     apt-get install php-yaml -y && \
     apt-get install php-dev -y && \
+    apt-get install inotify-tools -y && \
     apt-get install supervisor -y && \
     pecl install swoole
 
