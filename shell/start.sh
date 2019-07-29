@@ -11,7 +11,6 @@ service mysql start
 service redis-server start
 service beanstalkd start
 service supervisor start
-service mongodb start
 
 mysql -e "create database \`default\`"
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password'"
