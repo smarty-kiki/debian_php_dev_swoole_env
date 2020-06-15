@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:stretch
 
 RUN apt-get update && \
     apt-get install apt-utils -y && \
@@ -6,13 +6,27 @@ RUN apt-get update && \
     apt-get install nginx -y && \
     apt-get install mariadb-server -y && \
     apt-get install redis-server -y && \
+    apt-get install mongodb -y && \
     apt-get install beanstalkd -y && \
+    apt-get install php-redis -y && \
     apt-get install php-curl -y && \
+    apt-get install php-mysql -y && \
+    apt-get install php-mongodb -y && \
     apt-get install php-dom -y && \
     apt-get install php-mbstring -y && \
     apt-get install php-yaml -y && \
     apt-get install php-dev -y && \
+    apt-get install php-zip -y && \
+    apt-get install phpunit -y && \
     apt-get install inotify-tools -y && \
+    apt-get install wget -y && \
+    apt-get install gnupg -y && \
+    apt-get install zip -y && \
+    apt-get install git -y && \
+    apt-get install composer -y && \
+    apt-get install vim -y && \
+    apt-get install tmux -y && \
+    apt-get install tmuxinator -y && \
     apt-get install supervisor -y && \
     pecl install swoole
 
@@ -20,6 +34,11 @@ COPY ./shell/start.sh /bin/start
 RUN chown root:root /bin/start && \
     chmod +x /bin/start
 
+COPY ./config/bashrc /root/.bashrc
+COPY ./config/tmux.conf /root/.tmux.conf
+
+RUN mkdir -p /root/.tmuxinator
+COPY ./config/tmuxinator_init.yml /root/.tmuxinator/init.yml
 RUN sed -i -e "s/^bind\-address/#bind\-address/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN sed -i -e "s/^#general_log/general_log/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN sed -i -e "s/^query_cache_limit\ .*/query_cache_limit\ =\ 0M/g" /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -29,9 +48,13 @@ RUN ln -fs /etc/php/7.3/mods-available/swoole.ini /etc/php/7.3/cli/conf.d/10-swo
 
 RUN touch /tmp/php_exception.log && \
     touch /tmp/php_notice.log && \
+    touch /tmp/php_module.log && \
     chown www-data:www-data /tmp/php_exception.log && \
-    chown www-data:www-data /tmp/php_notice.log
+    chown www-data:www-data /tmp/php_notice.log && \
+    chown www-data:www-data /tmp/php_module.log
 
-EXPOSE 80 3306
+    ENV LC_ALL C.UTF-8
 
-CMD start
+    EXPOSE 80 3306
+
+    CMD start
