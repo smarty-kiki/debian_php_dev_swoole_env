@@ -1,5 +1,7 @@
 FROM debian:stretch
 
+COPY ./config/apt_source.list /etc/apt/sources.list
+
 RUN apt-get update && \
     apt-get install apt-utils -y && \
     apt-get upgrade -y && \
@@ -8,15 +10,16 @@ RUN apt-get update && \
     apt-get install redis-server -y && \
     apt-get install mongodb -y && \
     apt-get install beanstalkd -y && \
-    apt-get install php-redis -y && \
-    apt-get install php-curl -y && \
-    apt-get install php-mysql -y && \
-    apt-get install php-mongodb -y && \
-    apt-get install php-dom -y && \
-    apt-get install php-mbstring -y && \
-    apt-get install php-yaml -y && \
-    apt-get install php-dev -y && \
-    apt-get install php-zip -y && \
+    apt-get install php7.4-cli -y && \
+    apt-get install php7.4-dev -y && \
+    apt-get install php7.4-xml -y && \
+    apt-get install php7.4-zip -y && \
+    apt-get install php7.4-curl -y && \
+    apt-get install php7.4-mbstring -y && \
+    apt-get install php7.4-mongodb -y && \
+    apt-get install php7.4-mysql -y && \
+    apt-get install php7.4-redis -y && \
+    apt-get install php7.4-yaml -y && \
     apt-get install phpunit -y && \
     apt-get install inotify-tools -y && \
     apt-get install wget -y && \
