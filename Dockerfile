@@ -31,6 +31,7 @@ RUN apt-get update && \
     apt-get install tmux -y && \
     apt-get install tmuxinator -y && \
     apt-get install supervisor -y && \
+    apt-get install toilet -y && \
     pecl install swoole
 
 COPY ./shell/start.sh /bin/start
